@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0d1117;--surface:#161b22;--surface2:#21262d;
+    --border:#30363d;--text:#e6edf3;--muted:#8b949e;
+    --green:#3fb950;--blue:#58a6ff;--orange:#f0883e;--red:#ff7b72;
+    --yellow:#d29922;--purple:#bc8cff;
+  }
+  .hero-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.hero-text{flex:1;min-width:260px}
+.hero-avatar{
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  object-fit:contain;
+  border:2px solid var(--green);
+  box-shadow:0 0 0 4px rgba(63,185,80,0.15);
+}
+@media(max-width:600px){
+  .hero-avatar{width:110px;height:110px}
+}
+  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-height:1.6;min-height:100vh}
+  .mono{font-family:'JetBrains Mono',monospace}
+  nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+  .nav-logo{font-weight:800;font-size:1.1rem;color:var(--green)}
+  .nav-logo span{color:var(--muted)}
+  .nav-links{display:flex;gap:1.5rem}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s}
+  .nav-links a:hover{color:var(--green)}
+  .hero{padding:5rem 2rem 4rem;max-width:900px;margin:0 auto}
+  .hero-tag{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+  h1 .accent{color:var(--green)}
+  .hero-sub{color:var(--muted);font-size:1.1rem;max-width:520px;margin-bottom:0.5rem}
+  .hero-name{font-size:1rem;color:var(--blue);font-family:'JetBrains Mono',monospace;margin-bottom:1.5rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn{padding:0.6rem 1.4rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.2s}
+  .btn-primary{background:var(--green);color:#0d1117;font-weight:700;border:none}
+  .btn-primary:hover{background:#2ea043}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn-outline:hover{border-color:var(--green);color:var(--green)}
+  .terminal{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:3rem 2rem;max-width:900px;margin-left:auto;margin-right:auto}
+  .term-bar{display:flex;gap:6px;margin-bottom:1rem}
+  .term-dot{width:12px;height:12px;border-radius:50%}
+  .term-line{font-family:'JetBrains Mono',monospace;font-size:0.82rem;line-height:1.8;color:var(--muted)}
+  .term-line .c-green{color:var(--green)}
+  .term-line .c-blue{color:var(--blue)}
+  .term-line .c-orange{color:var(--orange)}
+  .term-line .c-yellow{color:var(--yellow)}
+  .term-line .c-purple{color:var(--purple)}
+  .term-cursor{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink 1s infinite;vertical-align:text-bottom}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  section{max-width:900px;margin:0 auto;padding:3rem 2rem}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+  .section-title{font-size:1.8rem;font-weight:800;margin-bottom:2rem}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem}
+  .skill-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;transition:border-color 0.2s}
+  .skill-card:hover{border-color:var(--green)}
+  .skill-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem}
+  .skill-name{font-weight:600;font-size:0.95rem;margin-bottom:0.8rem}
+  .skill-bar-bg{background:var(--surface2);border-radius:3px;height:4px}
+  .skill-bar{height:4px;border-radius:3px;transition:width 1s ease}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+  .proj-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;transition:border-color 0.2s;position:relative;overflow:hidden}
+  .proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue))}
+  .proj-card:hover{border-color:var(--blue)}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.8rem;flex-wrap:wrap}
+  .proj-title{font-weight:700;font-size:1rem;flex:1 1 auto;min-width:0}
+  .proj-tag{font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:2px 8px;border-radius:20px;border:1px solid;flex:0 0 auto;white-space:nowrap}
+  .tag-servlet{color:var(--orange);border-color:var(--orange);background:rgba(240,136,62,0.1)}
+  .tag-spring{color:var(--green);border-color:var(--green);background:rgba(63,185,80,0.1)}
+  .proj-desc{font-size:0.85rem;color:var(--muted);margin-bottom:1rem;line-height:1.5}
+  .proj-techs{display:flex;flex-wrap:wrap;gap:6px}
+  .tech-pill{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+  @media(max-width:600px){.about-grid{grid-template-columns:1fr}}
+  .about-text{color:var(--muted);font-size:0.95rem;line-height:1.8}
+  .about-text strong{color:var(--text)}
+  .stack-list{display:flex;flex-direction:column;gap:0.6rem}
+  .stack-item{display:flex;align-items:center;gap:0.75rem;font-family:'JetBrains Mono',monospace;font-size:0.82rem}
+  .stack-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+  .contact-row{display:flex;flex-wrap:wrap;gap:1rem}
+  .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.4rem;display:flex;align-items:center;gap:0.75rem;font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--text);text-decoration:none;transition:border-color 0.2s}
+  .contact-card:hover{border-color:var(--green);color:var(--green)}
+  footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted)}
+  footer span{color:var(--green)}
+  .divider{border:none;border-top:1px solid var(--border);margin:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">krtn.grg<span>.dev</span></div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag"><span class="dot"></span> available for opportunities</div>
+
+<div class="hero-header">
+  <div class="hero-text">
+    <h1>Backend<br>Developer <span class="accent">in Java</span></h1>
+    <div class="hero-name"> Kirtan Gurung · IT Undergraduate</div>
+  </div>
+  <img class="hero-avatar" src="images/profile.jpeg" alt="Kirtan Gurung profile picture">
+</div>
+  <p class="hero-sub">Building robust, scalable backend systems with Spring Boot.</p>
+  <div style="height:1rem"></div>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#projects">View Projects</a>
+    <a class="btn btn-outline" href="#contact">Get in Touch</a>
+  </div>
+</div>
+
+
+<hr class="divider" style="margin-top:3rem">
+
+<section id="about">
+  <!-- <div class="section-label">// me</div> -->
+  <div class="section-title">About</div>
+  <div class="about-grid">
+    <p class="about-text">
+      I'm <strong>Kirtan Gurung</strong>, an <strong>IT undergraduate</strong> passionate about building reliable, performant backend systems. My focus is on the <strong>Java ecosystem</strong> — from low-level Servlet mechanics to modern Spring Boot microservices.<br><br>
+      I care about clean architecture, RESTful design, and writing code that's maintainable and scalable. Always learning, always shipping.
+    </p>
+    <div class="stack-list" id="stackList"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="skills">
+  <!-- <div class="section-label">// expertise</div> -->
+  <div class="section-title">Tech Stack</div>
+  <div class="skills-grid" id="skillsGrid"></div>
+</section>
+
+<hr class="divider">
+
+<section id="projects">
+  <!-- <div class="section-label">// work</div> -->
+  <div class="section-title">Projects</div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-title">E-Commerce Backend</div>
+        <span class="proj-tag tag-spring">Spring Boot</span>
+      </div>
+      <p class="proj-desc">Full-featured REST API for an e-commerce platform — products, orders, cart, and user auth with JWT security.</p>
+      <div class="proj-techs">
+        <span class="tech-pill">Spring Boot</span><span class="tech-pill">Spring Security</span><span class="tech-pill">JPA</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">REST API</span><span class="tech-pill">Postman</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-title">Recommendation System</div>
+        <span class="proj-tag tag-spring">Spring Boot</span>
+      </div>
+      <p class="proj-desc">Personalized recommendation engine based on user reviews and ratings using collaborative filtering logic.</p>
+      <div class="proj-techs">
+        <span class="tech-pill">Spring Boot</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">Algorithms</span><span class="tech-pill">REST API</span><span class="tech-pill">Postman</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-title">Weather App</div>
+        <span class="proj-tag tag-spring">Spring Boot</span>
+      </div>
+      <p class="proj-desc">Backend service integrating a third-party weather API, caching responses and exposing clean REST endpoints.</p>
+      <div class="proj-techs">
+        <span class="tech-pill">Spring Boot</span><span class="tech-pill">REST API</span><span class="tech-pill">HTTP Client</span><span class="tech-pill">Postman</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-title">Library Management</div>
+        <span class="proj-tag tag-servlet">Servlet</span>
+      </div>
+      <p class="proj-desc">Full CRUD application for managing books, members, and borrowing records using Java Servlets & JDBC.</p>
+      <div class="proj-techs">
+        <span class="tech-pill">Java Servlet</span><span class="tech-pill">JDBC</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-title">To-Do List App</div>
+        <span class="proj-tag tag-servlet">Servlet</span>
+      </div>
+      <p class="proj-desc">Task management web app with persistent storage, session management, and a clean Java Servlet MVC architecture.</p>
+      <div class="proj-techs">
+        <span class="tech-pill">Java Servlet</span><span class="tech-pill">JSP</span><span class="tech-pill">JDBC</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">CSS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<hr class="divider">
+
+<section id="contact">
+  <!-- <div class="section-label">// reach out</div> -->
+  <div class="section-title">Contact</div>
+  <div class="contact-row">
+    <a class="contact-card" href="mailto:krtngrg@email.com">
+      <span>✉</span> krtngrg@email.com
+    </a>
+    <a class="contact-card" href="https://github.com/krtngrg">
+      <span>⌥</span> github/krtngrg
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/kirtangurung/">
+      <span>◈</span> linkedin/kirtangurung
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2026 krtn.grg.dev  &nbsp;|&nbsp; built with <span>&lt;/&gt;</span> HTML · CSS · JS
+</footer>
+
+<script>
+const skills = [
+  {label:'primary language',name:'Java',pct:90,color:'#f0883e'},
+  {label:'framework',name:'Spring Boot',pct:80,color:'#3fb950'},
+  {label:'web basics',name:'HTML & CSS',pct:75,color:'#58a6ff'},
+  {label:'scripting',name:'JavaScript',pct:65,color:'#d29922'},
+  {label:'database',name:'PostgreSQL',pct:80,color:'#336791'},
+  {label:'servlet api',name:'Java Servlets',pct:85,color:'#ff7b72'},
+  {label:'orm',name:'Spring Data JPA',pct:75,color:'#3fb950'},
+  {label:'api testing',name:'Postman',pct:78,color:'#ef5b25'},
+  {label:'tooling',name:'Maven / Git',pct:78,color:'#8b949e'},
+];
+
+const sg = document.getElementById('skillsGrid');
+skills.forEach(s => {
+  sg.innerHTML += `<div class="skill-card">
+    <div class="skill-label">${s.label}</div>
+    <div class="skill-name">${s.name}</div>
+    <div class="skill-bar-bg"><div class="skill-bar" data-w="${s.pct}" style="width:0%;background:${s.color}"></div></div>
+  </div>`;
+});
+
+const stack = [
+  {icon:'☕',name:'Java 21',color:'#f0883e'},
+  {icon:'🌱',name:'Spring Boot 3',color:'#3fb950'},
+  {icon:'🐘',name:'PostgreSQL',color:'#336791'},
+  {icon:'🔧',name:'Maven',color:'#58a6ff'},
+  {icon:'📮',name:'Postman',color:'#ef5b25'},
+  {icon:'🌐',name:'REST API Design',color:'#d29922'},
+  {icon:'📦',name:'Git & GitHub',color:'#8b949e'},
+];
+const sl = document.getElementById('stackList');
+stack.forEach(s => {
+  sl.innerHTML += `<div class="stack-item">
+    <div class="stack-icon" style="background:${s.color}22;color:${s.color}">${s.icon}</div>
+    <span>${s.name}</span>
+  </div>`;
+});
+
+setTimeout(() => {
+  document.querySelectorAll('.skill-bar').forEach(b => {
+    b.style.width = b.dataset.w + '%';
+  });
+}, 300);
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
